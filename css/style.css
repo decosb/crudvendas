@@ -1,0 +1,22 @@
+.title_system {
+	text-align: center;
+	margin: 20px 0;
+	color: #2f65b7;
+}
+
+.valor_total_vendas {
+	color: #FFFFFF;
+	padding: 5px;
+}
+
+.cep {
+	margin-right: 6px;
+}
+
+.consulta_venda_cep{
+	margin-bottom: 20px;
+}
+
+.btn_consultar_venda {
+	margin: 10px 0 25px 0;
+}

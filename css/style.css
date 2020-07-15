@@ -1,12 +1,64 @@
-.title_system {
-	text-align: center;
-	margin: 20px 0;
-	color: #2f65b7;
+/****** Override Bootstrap *********/
+.table-bordered td, .table-bordered th {
+	position: relative;
 }
 
-.valor_total_vendas {
+/****** End Override Bootstrap *********/
+.hide {
+	opacity: 0;
+}
+
+.valor_meta_mensal {
+	position: absolute;
+	top: 2%;
+	left: 53%;
+	z-index: 1;
+}
+
+table.info {
+	text-align: center;
+}
+
+#deleta_venda {
+	cursor: pointer;
+}
+
+.header-content {
+	height: 120px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.title_system {
+	margin: 20px 30px;
+	color: #007bff;
+	/*line-height: 120px;*/
+}
+
+.img_sistema_vendas {
+	width: 100px;
+	float: left;
+	margin-bottom: 10px;
+}
+
+.consulta_total {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.valor_total_vendas p {
+	text-align: center;
+	position: relative;
 	color: #FFFFFF;
 	padding: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+}
+
+.valor_total_vendas p{
+	margin: 0;
 }
 
 .cep {
@@ -14,9 +66,154 @@
 }
 
 .consulta_venda_cep{
-	margin-bottom: 20px;
+	margin: 20px 0;
 }
 
 .btn_consultar_venda {
 	margin: 10px 0 25px 0;
+}
+
+
+/********** menu ************/
+
+#box_menu_app {
+	position: fixed;
+	top: 0;
+	right: 0;
+	margin-right: -165px;
+	width: 165px;
+	height: 100%;
+	transition: ease 0.5s all;
+	z-index: 1;
+}
+
+.toLeftMenu {
+	margin-right: 0px!important;
+}
+
+.menu_app {
+	width: 100%;
+	height: 100%;
+	background-color: #007bff; 
+}
+
+.opcoes_sistema {
+	height: 100%;
+}
+.opcoes_sistema > div h4.opcao {
+	font-size: 1rem;
+    padding: 10px;
+    background-color: #19599e;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 0px;
+}
+.opcoes_sistema > div ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.opcoes_sistema > div ul li {
+	padding: 5px 10px;
+}
+
+
+.opcoes_sistema > div ul li a {
+	color: #ffffff;
+}
+.opcoes_sistema > div ul li a:hover {
+	opacity: .5;
+}
+
+.opcoes_sistema > div ul li i {
+	margin-right: 10px;
+}
+
+#btn_menu_app{
+	position: absolute;
+	width: 100px;
+	height: 50px;
+	top: 39px;
+	right: 165px;
+	font-weight: bold;
+	z-index: 1;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	text-transform: uppercase;
+}
+
+#btn_menu_app .fa-caret-left {
+	position: absolute;
+	right: 0px;
+	top: 15px;
+}
+
+/***** Formulários de cadastro, consulta, inserção e excluir *********/
+#form_cadastro {
+	padding: 20px;
+}
+
+/***** Modal de Exclusão de Produtos **********/
+button[name="btnExcluiProduto"] {
+	margin-top: 10px;
+	margin-left: 40%;
+}
+
+a.btnExcluiProduto {
+	color: #ffffff!important;
+	text-decoration: none;
+}
+
+/***** Modal de Consulta de Produtos **********/
+.produtos_retornados_consulta {
+	margin: 10px 0;
+	min-width: 100%;
+}
+
+.produtos_retornados_consulta #id_campo {
+	width: 5%;
+}
+
+.produtos_retornados_consulta #nome_campo {
+	width: 40%;
+}
+
+.produtos_retornados_consulta #preco_campo {
+	width: 10%;
+}
+
+.produtos_retornados_consulta #estoque_campo {
+	width: 10%; 
+}
+
+.produtos_retornados_consulta #fornecedor_campo {
+	width: 35%;
+}
+
+/*Modal Atualização de produtos*/
+#filtro_produtos_atualizacao #preco_campo input,
+#filtro_produtos_atualizacao #estoque_campo input,
+#filtro_produtos_atualizacao #fornecedor_campo input {
+	width: 80px;
+}
+.enabled-field-edit,
+.field-check
+{
+	cursor: pointer;
+}
+
+/***** Modal Info da Venda **********/
+.loading {
+	width: 95%;
+	height: 100%;
+	padding: 30px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	background-color: #fff;
+	z-index: 1;
+	transition: ease .5s;
 }

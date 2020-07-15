@@ -1,0 +1,15 @@
+adicionar botao para abrir modal - ok
+criar menu lateral - ok
+
+preço - formatação mascara banco / visual, visual / banco - ok
+formatar cep
+clicar cep (fazer integração com CEP) - ok
+mysql colocar inner join, left join, right join - ok
+----------------------------
+
+
+integrar json com curl
+
+
+
+///Universidade Sao Francisco

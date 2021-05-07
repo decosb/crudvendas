@@ -1,30 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<?php
-
-	$sistema = "Sistema de Vendas"; 
-	$pg_atua_produto = "Atualização de Produtos";
-	?>
-	<title><?php echo $sistema ."- ".$pg_atua_produto ?></title>
-
-	<!-- stylesheet -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-	<link rel="stylesheet" type="text/css" href="http://localhost/projetos/crud/css/fontawesome/css/all.css">
-	<link rel="stylesheet" type="text/css" href="http://localhost/projetos/crud/css/style.css">
-
-	<!-- script -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
-
-</head>
-<body>
-
-<!-- Modal -->
+<!-- Modal Atualizar-->
 <div class="modal fade" id="ModalAtualizaProduto" tabindex="-1" role="dialog" aria-labelledby="ModalAtualizaProdutoLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="ModalAtualizaProdutoLabel">Atualização de Produtos</h5>
@@ -33,47 +9,68 @@
         </button>
       </div>
       <div class="modal-body">
-        
-      	<div id="form_cadastro">
-		<form>
 
-		<div class="form-group">
-		<label for="at_nome_produto">Digite o Id do produto</label>
-		<input type="text" class="form-control" id="nome_produto" name="at_nome_produto" required>
+      <div id="form_atualizacao">
+			<form method="post" action="" name="atualizaProdutos">
+
+			<div class="form-group">
+			    <label for="at_Produto">Digite o nome do produto:</label>
+			    <input type="text" class="form-control" placeholder="Nome do produto" id="at_Produto">
+		  	</div>		
+
+			<div class="atualizacao_produtos">
+				
+				<table class="table thead-light table-striped table-bordered result_values">
+					<thead>
+					<tr>
+						<th>Nome:</th>
+						<th>Preço:</th>
+						<th>Estoque:</th>
+						<th>Fornecedor:</th>
+						<th colspan="3">Opções</th>
+					</tr>
+					</thead>
+					<tbody id="filtro_produtos_atualizacao">
+
+				<?php
+
+				//retorna os produtos 
+				if(count($res_produtos) > 0)
+				{
+
+					foreach ($res_produtos as $v)
+					{
+						$id_produto = $v['id_produto'];
+						$nome_produto = $v['nome_produto'];
+						$preco_produto = $v['preco_produto'];
+						$estoque_produto = $v['estoque_produto'];
+						$fornecedor = $v['fornecedor'];
+
+					echo "<tr id=\"id-$id_produto\">";
+					echo "<td id=\"nome_campo\"><input class=\"id-$id_produto\" name=\"nome_produto\" value=\"$nome_produto\" type=\"text\" ></td>";
+					echo "<td id=\"preco_campo\"><input name=\"preco_produto\" value=\"$preco_produto\" type=\"text\"  class=\"money2 id-$id_produto\"></td>";
+						echo "<td id=\"estoque_campo\"><input name=\"estoque_produto\" value=\"$estoque_produto\" type=\"text\" class=\"id-$id_produto\" ></td>";
+					echo "<td id=\"fornecedor_campo\"><input name=\"fornecedor\" value=\"$fornecedor\" type=\"text\" class=\"id-$id_produto\" ></td>";
+					echo "<td><button value=\"id-$id_produto\" data-get-id=\"id-$id_produto\" class=\"enabled-field-edit id-$id_produto btn btn-primary fas fa-edit ml-2 text-white\" title=\"Editar\"></button></td>";
+					echo "<td><button value=\"id-$id_produto\" data-get-id=\"id-$id_produto\" class=\"field-check-success btn btn-success fas fa-check-square ml-2 text-white\" title=\"Salvar alterações\"></button></td>";
+					echo "</tr>";					
+					}
+				}
+
+				echo "<tr><td colspan=\"6\" class=\"ret_registros\"></td></tr>";
+
+				?>
+				</tbody>
+			</table>
+			</div>
+			</form>
+
 		</div>
-
-		<div class="form-group">
-		<label for="nome_produto">Produto</label>
-		<input type="text" class="form-control" id="nome_produto" name="at_nome_produto" required>
-		</div>
-
-		<div class="form-group">
-		<label for="preco_produto">Preço</label>
-		<input type="text" class="form-control" id="preco_produto" name="at_preco_produto" required>
-		</div>
-
-		<div class="form-group">
-		<label for="estoque_produto">Estoque</label>
-		<input type="text" class="form-control" id="estoque_produto" name="at_estoque_produto" required>
-		</div>
-
-		<div class="form-group">
-		<label for="fornecedor_produto">Fornecedor</label>
-		<input type="text" class="form-control" id="fornecedor_produto" name="at_fornecedor_produto" required>
-		</div>
-
-		<button type="submit" class="btn btn-primary">Atualizar</button>
-		</form>
-		</div>
-
 
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      	<div class="modal-footer">
+        	<button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>
 </div>
-
-</body>
-</html>

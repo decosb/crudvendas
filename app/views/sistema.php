@@ -1,3 +1,10 @@
+<?php 
+
+$msg_modal_venda = "Carregando os dados, por favor aguarde..";
+
+ ?>
+
+
 <div class="valor_meta_mensal">
 <div class="toast" data-autohide="false">
   <div class="toast-header bg-light">
@@ -28,8 +35,8 @@
 <div class="container" id="app">
 	<div class="row">
 		<div class="col-sm-12 header-content bg-light p-2">
-			<img class="img_sistema_vendas img_fluid img-thumbnail float-left" src="img/img_estoque.jpg" alt="Sistema de Vendas">
-			<h1 class="title_system display-6 float-left">Gestão de Vendas</h1>
+			<img class="img_sistema_vendas img_fluid img-thumbnail float-left" src="app/views/img/img_estoque.jpg" alt="Sistema de Vendas">
+			<h1 class="title_system display-6 float-left">Controle de Estoque</h1>
 		</div>
 	</div>
 
@@ -55,7 +62,7 @@
 		if(count($res_vendas) > 0)
 		{
 
-					foreach ($res_vendas as $k => $v)
+				foreach ($res_vendas as $k => $v)
 				{
 
 					$id_produto = $v['id_produto'];
@@ -64,20 +71,27 @@
 					$fornecedor = $v['fornecedor'];
 					$valor_venda = $v['preco_produto'];
 					$cep_venda = $v['cep_venda'];
+				?>
 
-					echo "<tr>";
-						echo "<td><span class=\"badge badge-info\">". $id_produto ."</span></td>";
-						echo "<td>". $nome_produto ."</td>";
-						echo "<td>R$<span class=\"money2\">".$valor_venda."</span></td>";
-						echo "<td>". $fornecedor ."</td>";
-						echo "<td>". $data_venda ."</td>";
-						echo "<td><button get_cep=\"$cep_venda\" data-toggle=\"modal\" data-target=\"#exibeDetalhesVenda\" title=\"Clique para mais detalhes\" type=\"button\" class=\"cep btn btn-info get_cep\" value=\"$cep_venda\">". $cep_venda ."</button></td>";
-					echo "</tr>";
+				<tr>
+					<td><span class="badge badge-info"><?= $id_produto ?></span></td>
+					<td><?= $nome_produto ?></td>
+					<td>R$<span class="money2"> <?= $valor_venda ?> </span></td>
+					<td><?= $fornecedor ?> </td>
+					<td><?= $data_venda ?></td>
+					<td><button get_cep="<?= $cep_venda?>" data-toggle="modal" data-target="#exibeDetalhesVenda" title="Clique para mais detalhes" type="button" class="cep btn btn-info get_cep" value="<?= $cep_venda ?>"><?= $cep_venda ?></button></td>
+				</tr>
+
+				<?php
 				}	
-		}
+			}
 			else
 			{
-				echo "<tr><td colspan=\"6\" align=\"center\">Não há registros cadastrados</td></tr>";
+
+			?>
+				<tr><td colspan="6" align="center">Não há registros cadastrados</td></tr>
+			
+			<?php
 			}
 		?>
 
@@ -100,10 +114,10 @@
 		        <div class="modal-body" id="modal_viacep_cep">
 		        	<div class="form-group">
 		        	<div class="loading">
-		        		<p class="text-center">Carregando os dados, por favor aguarde..</p>
+		        		<p class="text-center"><?php echo $msg_modal_venda; ?></p>
 		        		<span class="spinner-border text-primary"></span>
 		        	</div>
-		        	<form method="get" action="">
+		        	<form method="get" action=".">
 				    <table class="table table-striped table-bordered">
 				    	<tbody>
 				    		<tr><td class="bg-dark text-white">Endereço de entrega</td></tr>

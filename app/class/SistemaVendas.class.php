@@ -133,6 +133,8 @@ public function ExcluiProdutos()
 			$stmt = $pdo->prepare($sql);
 			$stmt->bindParam(":id", $id_produto);
 			$del_prod = $stmt->execute();
+
+			header("Location: index.php");
 		}
 	} 
 	catch (PDOException $e)

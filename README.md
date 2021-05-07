@@ -1,4 +1,4 @@
-# crudvendas - Sistema com cadastro de produtos e consulta do local da venda por cep
+# crudvendas - Sistema com cadastro de produtos, fornecedores, clientes, consulta do local da venda por cep e status de vendas e pagamentos
 
 O sistema de vendas contém apenas duas tabelas: produto, venda.
 
@@ -17,7 +17,7 @@ Sobre a Tela do Sistema
 A tela contém as seguintes áreas:
 
 Botão Consultar venda por CEP
-Possibilita ao cliente fazer consulta do cep da venda, confirmando seu endereço completa via Webservice ViaCEP (https://viacep.com.br/),
+Possibilita ao cliente fazer consulta do cep da venda, confirmando seu endereço completo via Webservice ViaCEP (https://viacep.com.br/),
 consumindo este serviço com JSON.
 
 -----------------------------------

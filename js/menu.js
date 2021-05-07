@@ -1,29 +1,29 @@
 /** Menu **/
-$("document").ready(function() {
+$(document).ready(function() {
 
-// abre e fecha menu
-$("#btn_menu_app").click(function() {
-	$("#box_menu_app").toggleClass("toLeftMenu");
-});
+const btnMenu = $("#btn_menu_app")
+const menu = $("#box_menu_app")
+const options = $(".opcoes_sistema").find("h4")
+const lista = $(".opcoes_sistema").find("ul")
+lista.hide()
 
-// sub menu Produto e Fornecedor
-$("#menu_produto").hide();
-$("#menu_fornecedor").hide();
+btnMenu.click(function(){
+	menu.toggleClass("toLeftMenu")
+	$(".modal_opacity").toggleClass("d-none").css("transition", "opacity .5s");
+})
 
-$(".opcao-produto").click(function() {
-	$("#menu_produto").slideToggle(100);
-});
-	
-$(".opcao-fornecedor").click(function() {
-	$("#menu_fornecedor").slideToggle(100);
-});
+$(".modal_opacity").click(function(){
+	$(this).addClass("d-none").css("transition", "opacity .5s");
+	menu.toggleClass("toLeftMenu")
+})
 
-});
+$.each(options, function(i, el){
+	$(this).on("click", function(event){
+		const ul = $(el).next()
+		ul.slideToggle(200)
+	})
+})
 
-// Menu do Sistema
-$("#box_menu_app").hover(function(){
 
-  $(this).css("margin-right", "-165px");
 
-});
-
+})

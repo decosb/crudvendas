@@ -1,5 +1,5 @@
 // script
-$("document").ready(function() { // document
+$(document).ready(function() { // document
    $('.toast').toast('show');
 
 // Jquery Mask
@@ -37,33 +37,9 @@ $('.date').mask('00/00/0000');
     });
   $('.selectonfocus').mask("00/00/0000", {selectOnFocus: true});
 
-// pagina sistema.php
+  ///////////////////////////////////////////////////////////////
 
-// Modal consulta de produtos
-
-// Formulário de cadastro
-var nome = $("#nome_produto");
-var preco = $("#preco_produto");
-var estoque = $("#estoque_produto");
-var fornecedor = $("#fornecedor_produto");
-
-$("#cons_Produto").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#filtro_produtos tr").filter(function() {
-        $(".consulta_produtos").show();
-        if($(this).toggle($(this).text().toLowerCase().indexOf(value) > -1) == 0)
-        {
-          $(".produtos_retornados_consulta").hide();
-          $(".consulta_produtos").html("Nenhum registro encontrado.");
-        }
-        else
-        {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        }
-    });
-});
-
-// Modal de cep -> index
+// Modal de cep -> home
 $(".loading").removeClass("hide");
 $(".get_cep").click(function() {
     var cep = $(this).attr("get_cep");
@@ -86,6 +62,32 @@ $(".get_cep").click(function() {
     });
   });
 
+// Modal de cadastro
+$("#form_cadastro button[name='cadastraProduto']").attr("disabled", true)
+$("#nome_produto").keyup(function(){
+  if($(this).val() !== "")
+  {
+    $("#form_cadastro button[name='cadastraProduto']").attr("disabled", false).removeClass("btn-secondary").addClass("btn-success")
+  }
+  else
+  {
+    $("#form_cadastro button[name='cadastraProduto']").attr("disabled", true).addClass("btn-secondary").removeClass("btn-success")
+  }
+})
+
+
+// Modal de consulta
+$("#cons_Produto").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#filtro_produtos tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);     
+    });
+});
+
+$(".consulta_produto").click(function(e){
+    $("#cons_Produto").val("")
+})
+
     // blur do botão CEP
     $(".get_cep").focus(function() {
       // Esconde icone de loading
@@ -100,42 +102,58 @@ $(".get_cep").click(function() {
     $(".loading").removeClass("hide");
     });
 
-// Habilita os campos nome, preço, estoque e fornecedor de
 // Formulário de Atualização
-var id_campo = $("#id_campo").html();
-var id_produto_edit =$("#id_produto_edit").attr("data-get-id");
+const table = $(".result_values")
 
-$("#id_produto_edit").click(function(){
+const result = {
+  inputs: table.find("input:text").attr("disabled", true),
+  edit:  table.find(".enabled-field-edit"),
+  success:  table.find(".field-check-success").attr("disabled", true)
+}
 
- if(id_campo === id_produto_edit)
- {
-    var i;
-    for(i=0; i < id_campo.length; i++)
-    {
-      $("#nome_campo input[type='text']").removeAttr("disabled");
-      $("#preco_campo input[type='text']").removeAttr("disabled");
-      $("#estoque_campo input[type='text']").removeAttr("disabled");
-      $("#fornecedor_campo input[type='text']").removeAttr("disabled");
-    }
- } 
+// botão editar produto
+result.edit.click(function(event){
+  event.preventDefault()
+  var row = $(this).closest("tr")
+  var lastCol = row.find("td:eq(5) .field-check-success")
+
+  $(this).removeClass("btn-primary").addClass("fa-window-close btn-danger")
+  row.find(result.inputs).attr("disabled", false) 
+  lastCol.attr("disabled", false)
+
+})
+
+result.edit.focusout(function(){
+  var row = $(this).closest("tr")
+  var lastCol = row.find("td:eq(5) .field-check-success")
+
+  $(this).removeClass("fa-window-close btn-danger").addClass("fa-edit btn-primary")
+  row.find(result.inputs).attr("disabled", true) 
+  lastCol.attr("disabled", true)
+})
+
+// pesquisa produto para atualizar
+$("#at_Produto").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#filtro_produtos_atualizacao tr").filter(function() {
+        $(this).toggle($("input[name='nome_produto']").text().toLowerCase().indexOf(value) > -1);     
+    });
 });
-// Desabilita os campos nome, preço, estoque e fornecedor de
-// Formulário de Atualização
-$("#id_produto_edit_cancel").click(function(){
-  if(id_campo === id_produto_edit)
- {
-    var i;
-    for(i=0; i < id_campo.length; i++)
-    {
-      $("#nome_campo input[type='text']").attr("disabled", "true");
-      $("#preco_campo input[type='text']").attr("disabled", "true");
-      $("#estoque_campo input[type='text']").attr("disabled", "true");
-      $("#fornecedor_campo input[type='text']").attr("disabled", "true");
-    }
- }
-});
 
-// Formulário Excluir
+
+// Modal Excluir
+// confirm nos botoes de deletar produtos
+$(".excluir_produto").click(function(){
+  if(confirm("Quer excluir este produto?") == true)
+  {
+    return true
+  }
+  else
+  {
+    return false
+  }
+  
+})
 
 
 }); // document
